@@ -1,0 +1,9 @@
+.snackbar-success {
+  background-color: green; /* yeşil */
+  color: green;
+}
+
+.snackbar-error {
+  background-color: #f44336; /* kırmızı */
+  color: white;
+}

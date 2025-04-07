@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#Sipariş No</th>
+    <th scope="col">Müşteri</th>
+    <th scope="col">Ödeme Şekli</th>
+    <th scope="col">Toplam</th>
+    <th scope="col">
+      <a class="btn btn-outline-success" routerLink="/order">
+        <i class="fa fa-plus"></i> Yeni Sipariş Oluştur</a>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of orderList">
+    <th scope="row">{{item.orderNo}}</th>
+    <td>{{item.customerName}}</td>
+    <td>{{item.paymentMethod}}</td>
+    <td>{{item.grandTotal}}</td>
+    <td>
+      <a class="btn btn-danger text-white" (click)="OnOrderDelete(item.orderId)">
+        <i class="fa fa-trash"></i> Sil</a>
+    </td>
+  </tr>
+  </tbody>
+</table>

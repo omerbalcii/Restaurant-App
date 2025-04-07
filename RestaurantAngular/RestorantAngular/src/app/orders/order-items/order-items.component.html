@@ -1,0 +1,50 @@
+<div class="alert alert-primary" role="alert">
+    Yemek Sipariş Detayı
+</div>
+<hr>
+<form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+    <input type="hidden" name="orderId" #orderId="ngModel" [(ngModel)]="formData.orderId">
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formData.id">
+    <input type="hidden" name="itemName" #itemName="ngModel" [(ngModel)]="formData.itemName">
+    <div class="form-group">
+        <label>Yemek Seçimi</label>
+        <select name="itemId" #itemId="ngModel" [(ngModel)]="formData.itemId" class="form-control" (change)="updatePrice($event)"
+            [class.is-invalid]="!isValid && formData.itemId==0">
+            <option value="0">--Seçiniz--</option>
+            <option *ngFor="let item of itemList" value="{{item.itemId}}">{{item.name}}</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Fiyat</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">TL</div>
+                </div>
+                <input type="number" min="0" name="price" #price="ngModel" [(ngModel)]="formData.price" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Miktar</label>
+            <input name="quantity" type="number" min="0" #quantity="ngModel" [(ngModel)]="formData.quantity" class="form-control" (keyup)="updateTotal()"
+                [class.is-invalid]="!isValid && formData.quantity==0" />
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <label>Toplam Fiyat</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">TL</div>
+            </div>
+            <input name="total" #total="ngModel" [(ngModel)]="formData.total" class="form-control" readonly/>
+        </div>
+    </div>
+  <div class="form-group ">
+    <button type="submit" class="btn btn-primary">
+      <i class="fa fa-save"></i>Submit</button>
+    <button type="reset" class="btn btn-danger ml-1" (click)="close()" [mat-dialog-close]>
+      <i class="fa fa-close"></i>Close</button>
+  </div>
+</form>
+

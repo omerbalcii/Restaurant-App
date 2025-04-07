@@ -1,0 +1,92 @@
+<form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="orderNo"><b>Sipariş No:</b></label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><b>#</b></div>
+            </div>
+            <input id="orderNo" name="OrderNo" #OrderNo="ngModel" [(ngModel)]="orderModel.orderNo" class="form-control" placeholder="Sipariş numarasını girin" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="customerId"><b>Müşteri:</b></label>
+          <select id="customerId" name="customerId" #customerId="ngModel" [(ngModel)]="orderModel.customerId" class="form-control" [class.is-invalid]="!isValid">
+            <option value="0">- Seçiniz -</option>
+            <option *ngFor="let cus of customerList" [value]="cus.customerId">{{cus.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="paymentMethod"><b>Ödeme Tipi:</b></label>
+          <select id="paymentMethod" name="PaymentMethod" #paymentMethod="ngModel" [(ngModel)]="orderModel.paymentMethod" class="form-control">
+            <option value="0">Lütfen Bir Ödeme Tipi Seçiniz</option>
+            <option value="Nakit">Nakit</option>
+            <option value="Kredi Kartı">Kredi Kartı</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="grandTotal"><b>Toplam Tutar:</b></label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><b>TL</b></div>
+            </div>
+            <input id="grandTotal" name="grandTotal" #grandTotal="ngModel" [(ngModel)]="orderModel.grandTotal"  class="form-control" placeholder="Toplam tutarı girin" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th>Yemek</th>
+          <th>Fiyat</th>
+          <th>Adet</th>
+          <th>Toplam</th>
+          <th>
+            <button type="button" class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null, orderModel.orderId)">
+              <i class="fa fa-plus"></i> Sipariş Ekle
+            </button>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngIf="orderItemModel.length == 0" [class.text-danger]="!isValid && orderItemModel.length == 0">
+          <td colspan="5" class="text-center">
+            <strong>Sipariş Edilen Kayıt Bulunamadı</strong>
+          </td>
+        </tr>
+        <tr *ngFor="let item of orderItemModel; let i = index;">
+          <td>{{ item.itemName }}</td>
+          <td>{{ item.price | currency:'TRY ' }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.total | currency:'TRY ' }}</td>
+          <td>
+            <button type="button" class="btn btn-sm btn-primary text-white" (click)="AddOrEditOrderItem(i, orderModel.orderId)">
+              <i class="fa fa-pencil"></i> Düzenle
+            </button>
+            <button type="button" class="btn btn-sm btn-danger text-white ml-2" (click)="DeleteOrderItem(i, orderModel.orderId)">
+              <i class="fa fa-trash"></i> Sil
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-save"></i> Kaydet
+      </button>
+      <a class="btn btn-danger" routerLink="/orders" style="margin-left: 20px;">
+        <i class="fa fa-table"></i> Sipariş Listesi
+      </a>
+    </div>
+  </div>
+</form>
