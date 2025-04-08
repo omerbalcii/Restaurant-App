@@ -3,6 +3,10 @@
 
 RestaurantApp, müşteri odaklı sipariş yönetimi sağlayan tam kapsamlı bir restoran yönetim sistemidir. Bu proje, daha önce .NET platformunda geliştirilmiş olup, **backend Java Spring Boot**, **frontend ise Angular** kullanılarak baştan yazılmıştır.
 
+
+![Ekran görüntüsü 2025-04-07 225411](https://github.com/user-attachments/assets/95f62f58-47b9-47d8-85d3-fbfe448c8f97)
+![Ekran görüntüsü 2025-04-07 225354](https://github.com/user-attachments/assets/32251a25-8943-43a9-acc0-939f914e94ed)
+
 ## 🔧 Teknolojiler
 
 ### Backend
